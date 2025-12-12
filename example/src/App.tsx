@@ -1,12 +1,12 @@
 import { Text, View, StyleSheet } from 'react-native';
-import { multiply } from 'react-native-usb';
+import { connect } from 'react-native-usb';
 
-const result = multiply(3, 7);
+const device = connect();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Device: {device}</Text>
     </View>
   );
 }
