@@ -33,6 +33,9 @@ android {
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+    ndk {
+      abiFilters 'armeabi'
+    }
   }
 
   buildFeatures {
@@ -76,4 +79,5 @@ dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation 'com.github.mik3y:usb-serial-for-android:3.9.0'
+  implementation 'com.tencent.bugly:crashreport:latest.release'
 }

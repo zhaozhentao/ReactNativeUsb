@@ -7,13 +7,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.UiThreadUtil;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,6 +31,8 @@ public class UsbModule extends NativeUsbSpec implements SerialInputOutputManager
 
   public UsbModule(ReactApplicationContext reactContext) {
     super(reactContext);
+
+    CrashReport.initCrashReport(getReactApplicationContext(), "e15ee542c2", true);
   }
 
   @NonNull
@@ -75,6 +81,12 @@ public class UsbModule extends NativeUsbSpec implements SerialInputOutputManager
 
   @Override
   public void send() {
+    if (usbIoManager == null) {
+      Toast.makeText(getReactApplicationContext(), "未连接", Toast.LENGTH_SHORT).show();
+
+      return;
+    }
+
     byte[] buf = {0x08, 0x03, 0x00, 0x1A, 0x00, 0x01, (byte) 0xA5, 0x54};
 
     usbIoManager.writeAsync(buf);
@@ -82,9 +94,15 @@ public class UsbModule extends NativeUsbSpec implements SerialInputOutputManager
 
   @Override
   public void onNewData(byte[] bytes) {
+    WritableArray array = Arguments.createArray();
+
+    for (byte b : bytes) {
+      array.pushInt(b & 0xff);
+    }
+
     getReactApplicationContext()
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-      .emit("onSerialDataReceive", bytes);
+      .emit("onSerialDataReceive", array);
   }
 
   @Override
