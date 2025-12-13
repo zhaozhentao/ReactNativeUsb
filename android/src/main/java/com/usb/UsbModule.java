@@ -3,12 +3,14 @@ package com.usb;
 import android.content.Context;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.module.annotations.ReactModule;
@@ -80,17 +82,22 @@ public class UsbModule extends NativeUsbSpec implements SerialInputOutputManager
   }
 
   @Override
-  public void send() {
+  public void send(ReadableArray data) {
+    byte[] buf = new byte[data.size()];
+
+    for (int i = 0; i < data.size(); i++) {
+      buf[i] = (byte) data.getInt(i);
+    }
+
     if (usbIoManager == null) {
       Toast.makeText(getReactApplicationContext(), "未连接", Toast.LENGTH_SHORT).show();
 
       return;
     }
 
-    byte[] buf = {0x08, 0x03, 0x00, 0x1A, 0x00, 0x01, (byte) 0xA5, 0x54};
-
     usbIoManager.writeAsync(buf);
   }
+
 
   @Override
   public void onNewData(byte[] bytes) {

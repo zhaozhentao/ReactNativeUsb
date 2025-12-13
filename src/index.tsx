@@ -4,6 +4,6 @@ export function connect(): string {
   return Usb.connect();
 }
 
-export function send(): void {
-  return Usb.send();
+export function send(data: number[]): void {
+  return Usb.send(data);
 }

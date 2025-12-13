@@ -34,7 +34,10 @@ export default function App() {
     <View style={styles.container}>
       <Text>1 Device: {device}</Text>
 
-      <Button title={'sdf'} onPress={send} />
+      <Button
+        title={'sdf'}
+        onPress={() => send([0x08, 0x03, 0x00, 0x1a, 0x00, 0x01, 0xa5, 0x54])}
+      />
     </View>
   );
 }
