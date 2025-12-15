@@ -1,6 +1,6 @@
 # react-native-usb
 
-android usb interface
+Android Usb 串口通信
 
 ## Installation
 
