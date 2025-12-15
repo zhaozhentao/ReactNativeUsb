@@ -6,7 +6,7 @@ Android Usb 串口通信
 
 
 ```sh
-npm install react-native-usb
+npm install @zhaozhentao/react-native-usb
 ```
 
 
@@ -14,11 +14,11 @@ npm install react-native-usb
 
 
 ```js
-import { multiply } from 'react-native-usb';
+import { connect, send } from 'react-native-usb';
 
 // ...
 
-const result = multiply(3, 7);
+const result = connect();
 ```
 
 
