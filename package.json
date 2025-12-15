@@ -47,7 +47,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhaozhentao/react-native-usb.git"
+    "url": "git+https://github.com/zhaozhentao/ReactNativeUsb.git"
   },
   "author": "zhaozhentao <qq344696734@gmail.com> (https://github.com/zhaozhentao)",
   "license": "MIT",
