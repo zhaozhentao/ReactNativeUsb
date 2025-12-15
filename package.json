@@ -1,5 +1,5 @@
 {
-  "name": "react-native-usb",
+  "name": "@zhaozhentao/react-native-usb",
   "version": "0.1.0",
   "description": "android usb interface",
   "main": "./lib/module/index.js",
