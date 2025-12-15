@@ -17,7 +17,6 @@ import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,8 +30,6 @@ public class UsbModule extends NativeUsbSpec implements SerialInputOutputManager
 
   public UsbModule(ReactApplicationContext reactContext) {
     super(reactContext);
-
-    CrashReport.initCrashReport(getReactApplicationContext(), "e15ee542c2", true);
   }
 
   @NonNull
