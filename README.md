@@ -14,13 +14,12 @@ npm install @zhaozhentao/react-native-usb
 
 
 ```js
-import { connect, send } from 'react-native-usb';
+import { connect, send } from '@zhaozhentao/react-native-usb';
 
 // ...
 
 const result = connect();
 ```
-
 
 ## Contributing
 
